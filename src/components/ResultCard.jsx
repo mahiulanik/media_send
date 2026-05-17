@@ -16,7 +16,7 @@ const ResultCard = ({ item }) => {
       try {
         await navigator.share({
           title: item.type.toUpperCase(),
-          text: "দেখো এই media টা!",
+          text: "Shared by Media Send",
           url: item.url,
         });
       } catch (error) {
