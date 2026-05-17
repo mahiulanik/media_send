@@ -4,7 +4,11 @@ import { Link } from "react-router-dom";
 const NavBar = () => {
   return (
     <div className="flex justify-between items-center py-6 px-10 bg-blue-800">
-      <h2 className="font-medium text-2xl">Media Send</h2>
+      <div>
+        <Link className="active:scale-95" to="/">
+          <h2 className="font-medium text-2xl">Media Send</h2>
+        </Link>
+      </div>
 
       <div className="flex gap-5 items-center">
         <Link

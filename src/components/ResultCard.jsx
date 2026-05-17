@@ -10,6 +10,26 @@ const ResultCard = ({ item }) => {
     dispatch(addCollection(item));
     dispatch(addedToast());
   };
+
+  const shareItem = async (item) => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: item.type.toUpperCase(),
+          text: "দেখো এই media টা!",
+          url: item.url,
+        });
+      } catch (error) {
+        // user cancel করলেও error আসে, তাই ignore করলাম
+        console.log("Share cancelled");
+      }
+    } else {
+      // browser Web Share API support না করলে
+      navigator.clipboard.writeText(item.url);
+      alert("Link copied to clipboard!");
+    }
+  };
+
   return (
     <div className="w-[18vw] relative h-80 bg-white rounded-xl overflow-hidden">
       <a className="h-full" target="_blank" href={item.url}>
@@ -50,14 +70,23 @@ const ResultCard = ({ item }) => {
         <h2 className="text-lg font-semibold capitalize h-14 overflow-hidden">
           {item.title}
         </h2>
-        <button
-          onClick={() => {
-            addToCollection(item);
-          }}
-          className="bg-indigo-600 active:scale-95 text-white rounded px-3 py-1 cursor-pointer font-medium"
-        >
-          Save
-        </button>
+
+        <div className="flex gap-2">
+          {" "}
+          {/* ← Save আর Share পাশাপাশি */}
+          <button
+            onClick={() => shareItem(item)}
+            className="bg-green-600 active:scale-95 text-white rounded px-3 py-1 cursor-pointer font-medium"
+          >
+            Share
+          </button>
+          <button
+            onClick={() => addToCollection(item)}
+            className="bg-indigo-600 active:scale-95 text-white rounded px-3 py-1 cursor-pointer font-medium"
+          >
+            Save
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -8,6 +8,8 @@ const searchSlice = createSlice({
     results: [],
     loading: false,
     error: null,
+    page: 1,
+    totalPages: 1,
   },
   reducers: {
     setQuery(state, action) {
@@ -31,6 +33,15 @@ const searchSlice = createSlice({
     clearResults(state) {
       state.results = [];
     },
+    setPage(state, action) {
+      state.page = action.payload;
+    },
+    resetPage(state) {
+      state.page = 1;
+    },
+    setTotalPages(state, action) {
+      state.totalPages = action.payload;
+    },
   },
 });
 
@@ -41,6 +52,9 @@ export const {
   setLoading,
   setError,
   clearResults,
+  setPage,
+  resetPage,
+  setTotalPages,
 } = searchSlice.actions;
 
 export default searchSlice.reducer;

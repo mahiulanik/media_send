@@ -4,10 +4,29 @@ import { removeCollection, removeToast } from "../app/features/collectionSlice";
 
 const CollectionCard = ({ item }) => {
   const dispatch = useDispatch();
+
   const removeFromCollection = (item) => {
     dispatch(removeCollection(item.id));
     dispatch(removeToast());
   };
+
+  const shareItem = async (item) => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: item.type.toUpperCase(),
+          text: "দেখো এই media টা!",
+          url: item.url,
+        });
+      } catch (error) {
+        console.log("Share cancelled");
+      }
+    } else {
+      navigator.clipboard.writeText(item.url);
+      alert("Link copied to clipboard!");
+    }
+  };
+
   return (
     <div className="w-[18vw] relative h-80 bg-white rounded-xl overflow-hidden">
       <a className="h-full" target="_blank" href={item.url}>
@@ -48,17 +67,23 @@ const CollectionCard = ({ item }) => {
         <h2 className="text-lg font-semibold capitalize h-14 overflow-hidden">
           {item.title}
         </h2>
-        <button
-          onClick={() => {
-            removeFromCollection(item);
-          }}
-          className="bg-indigo-600 active:scale-95 text-white rounded px-3 py-1 cursor-pointer font-medium"
-        >
-          Remove
-        </button>
+        <div className="flex gap-2">
+          <button
+            onClick={() => shareItem(item)}
+            className="bg-green-600 active:scale-95 text-white rounded px-3 py-1 cursor-pointer font-medium"
+          >
+            Share
+          </button>
+          <button
+            onClick={() => removeFromCollection(item)}
+            className="bg-indigo-600 active:scale-95 text-white rounded px-3 py-1 cursor-pointer font-medium"
+          >
+            Remove
+          </button>
+        </div>
       </div>
     </div>
-  );
+  ); // ✅ return বন্ধ
 };
 
 export default CollectionCard;
