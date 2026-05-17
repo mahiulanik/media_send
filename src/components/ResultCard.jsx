@@ -31,7 +31,7 @@ const ResultCard = ({ item }) => {
   };
 
   return (
-    <div className="w-[18vw] relative h-80 bg-white rounded-xl overflow-hidden">
+    <div className="w-[18vw] relative h-80 bg-white rounded-xl ">
       <a className="h-full" target="_blank" href={item.url}>
         {item.type == "photo" ? (
           <img
@@ -65,13 +65,13 @@ const ResultCard = ({ item }) => {
       </a>
       <div
         id="bottom"
-        className="flex justify-between gap-3 items-center w-full px-4 py-6 absolute bottom-0 text-white"
+        className="flex justify-end gap-1 items-center w-full px-3 py-3 absolute bottom-0 text-white"
       >
-        <h2 className="text-lg font-semibold capitalize h-14 overflow-hidden">
+        {/* <h2 className="text-lg font-semibold capitalize h-14 overflow-hidden">
           {item.title}
-        </h2>
+        </h2> */}
 
-        <div className="flex gap-2">
+        <div className="flex gap-1">
           {" "}
           {/* ← Save আর Share পাশাপাশি */}
           <button

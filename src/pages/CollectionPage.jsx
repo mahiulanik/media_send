@@ -16,9 +16,17 @@ const CollectionPage = () => {
     <div>
       <div className="flex justify-start w-full flex-wrap gap-6 overflow-auto px-10 py-6">
         {currentItems.length === 0 ? (
-          <h2 className="text-white text-center w-full mt-20 text-4xl">
-            No Saved Items!
-          </h2>
+          <div className="flex justify-center items-center w-full mt-20">
+            <div className="bg-gray-800 border border-gray-700 rounded-2xl px-10 py-12 text-center shadow-xl">
+              <div className="text-7xl mb-5">💾</div>
+
+              <h2 className="text-white text-3xl font-bold">No Saved Items</h2>
+
+              <p className="text-gray-400 mt-3">
+                Save your favorite media to see them here.
+              </p>
+            </div>
+          </div>
         ) : (
           currentItems.map((item, idx) => (
             <div key={idx}>
