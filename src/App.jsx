@@ -10,7 +10,7 @@ const App = () => {
     <div className="min-h-screen text-white w-full bg-gray-900 flex flex-col">
       <NavBar />
 
-      <div className="flex-grow">
+      <div className="grow">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/collection" element={<CollectionPage />} />
